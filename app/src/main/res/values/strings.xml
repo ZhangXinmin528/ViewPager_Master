@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ViewPager_Master</string>
+
+    <string name="menu_origvp">传统ViewPager</string>
+    <string name="menu_origbanner">传统Banner</string>
+    <string name="menu_stackvp">StackViewPger</string>
+    <string name="menu_stackbanner">StackBanner</string>
+
+    <!--原始-->
+    <string name="original_banner">原生Banner</string>
+    <string name="original_vp">原生ViewPager</string>
+
+</resources>
