@@ -219,8 +219,7 @@ public class BannerView<T> extends RelativeLayout {
         //不管配置的:open_mz_mode 属性的值是否为true
 
         if (datas.size() < 3) {
-//            throw new Exception("Please add at least 3 items!");
-            return;
+            throw new UnsupportedOperationException("Please add at least 3 items!");
         }
         mViewPager.setPageTransformer(false, new StackTransformer());//开启堆叠模式
 
@@ -281,6 +280,7 @@ public class BannerView<T> extends RelativeLayout {
 
     /**
      * 获取
+     *
      * @return
      */
     public int getBannerDuration() {

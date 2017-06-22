@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.example.viewpager_master.fragment.OrigBannerFragment;
 import com.example.viewpager_master.fragment.OrigVPFragment;
+import com.example.viewpager_master.fragment.StackBannerFragment;
+import com.example.viewpager_master.fragment.StackVPFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
                 switchShowItem(OrigBannerFragment.class.getSimpleName());
                 break;
             case R.id.menu_stackvp://StackViewPager
-
+                switchShowItem(StackVPFragment.class.getSimpleName());
                 break;
             case R.id.menu_stackbanner://StackBanner
-
+                switchShowItem(StackBannerFragment.class.getSimpleName());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -81,6 +83,20 @@ public class MainActivity extends AppCompatActivity {
                     origBannerFragment = OrigBannerFragment.newInstance();
 
                 switchShowFragment(origBannerFragment, type);
+                break;
+            case "StackBannerFragment":
+                StackBannerFragment stackBannerFragment = (StackBannerFragment) mFragManager.findFragmentByTag("StackBannerFragment");
+                if (stackBannerFragment == null)
+                    stackBannerFragment = StackBannerFragment.newInstance();
+
+                switchShowFragment(stackBannerFragment, type);
+                break;
+            case "StackVPFragment":
+                StackVPFragment stackVPFragment = (StackVPFragment) mFragManager.findFragmentByTag("StackVPFragment");
+                if (stackVPFragment == null)
+                    stackVPFragment = StackVPFragment.newInstance();
+
+                switchShowFragment(stackVPFragment, type);
                 break;
         }
     }
