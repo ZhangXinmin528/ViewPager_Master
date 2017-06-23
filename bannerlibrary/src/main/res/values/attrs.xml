@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BannerView">
-        <attr name="isStartBanner" format="boolean"/>
+        <attr name="isStartBanner" format="boolean" />
+        <attr name="indicator_style" format="enum">
+            <enum name="point" value="0" />
+            <enum name="rectangle" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

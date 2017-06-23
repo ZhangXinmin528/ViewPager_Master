@@ -28,6 +28,12 @@ import java.util.List;
  */
 
 public class BannerView<T> extends RelativeLayout {
+    private static final String TAG = BannerView.class.getSimpleName();
+
+    //指示器类型
+    private static final int STYLE_POINT = 0;//圆点
+    private static final int STYLE_RECT = 1;//矩形
+
     private static final int OFFSCREEN_PAGES = 4;
     private Context mContext;
 
@@ -42,6 +48,7 @@ public class BannerView<T> extends RelativeLayout {
     private int mPaddingOffset;//相邻两个的距离
     private boolean mIsStartBanner;//是否轮播
     private boolean mIsAutoPlay = true;//是否自动播放
+    private int mIndicatorStyle;//指示器的类型
     private int mCurrentItem;//显示当前页
     private int mDelayedTime = 3000;// Banner 切换时间间隔
     private ViewPager.OnPageChangeListener mOnPageChangeListener;
@@ -82,7 +89,7 @@ public class BannerView<T> extends RelativeLayout {
 
         TypedArray tArray = mContext.obtainStyledAttributes(attrs, R.styleable.BannerView);
         mIsStartBanner = tArray.getBoolean(R.styleable.BannerView_isStartBanner, true);
-
+        mIndicatorStyle = tArray.getInt(R.styleable.BannerView_indicator_style, STYLE_POINT);
         //初始化Scroller
         initBannerScroller();
 
@@ -129,6 +136,23 @@ public class BannerView<T> extends RelativeLayout {
             ImageView pointIv = new ImageView(mContext);
             pointIv.setScaleType(ImageView.ScaleType.FIT_XY);//设置样式
             pointIv.setLayoutParams(params);
+            switch (mIndicatorStyle) {
+                case STYLE_POINT:
+                    if (i == 0) {
+                        pointIv.setImageResource(R.drawable.point_selected);
+                    } else {
+                        pointIv.setImageResource(R.drawable.point_unselected);
+                    }
+
+                    break;
+                case STYLE_RECT:
+                    if (i == 0) {
+                        pointIv.setImageResource(R.drawable.rect_indicator_selected);
+                    } else {
+                        pointIv.setImageResource(R.drawable.rect_indicator_unselected);
+                    }
+                    break;
+            }
             mPointsList.add(pointIv);
             mPointLayout.addView(pointIv);
         }
@@ -236,15 +260,26 @@ public class BannerView<T> extends RelativeLayout {
             public void onPageSelected(int position) {
                 mCurrentItem = position;
 
-
                 // 切换indicator
                 int realSelectPosition = mCurrentItem % mPointsList.size();
                 for (int i = 0; i < mDataList.size(); i++) {
-                    if (i == realSelectPosition) {
-                        mPointsList.get(i).setImageResource(R.drawable.point_selected);
-                    } else {
-                        mPointsList.get(i).setImageResource(R.drawable.point_unselected);
+                    switch (mIndicatorStyle) {
+                        case STYLE_POINT://圆点
+                            if (i == realSelectPosition) {
+                                mPointsList.get(i).setImageResource(R.drawable.point_selected);
+                            } else {
+                                mPointsList.get(i).setImageResource(R.drawable.point_unselected);
+                            }
+                            break;
+                        case STYLE_RECT://矩形
+                            if (i == realSelectPosition) {
+                                mPointsList.get(i).setImageResource(R.drawable.rect_indicator_selected);
+                            } else {
+                                mPointsList.get(i).setImageResource(R.drawable.rect_indicator_unselected);
+                            }
+                            break;
                     }
+
                 }
             }
 

@@ -20,5 +20,6 @@
         android:id="@+id/bannerview"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        app:isStartBanner="true" />
+        app:isStartBanner="true"
+        app:indicator_style="rectangle"/>
 </LinearLayout>
