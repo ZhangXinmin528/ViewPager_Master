@@ -205,7 +205,7 @@ public class OrigBannerFragment extends Fragment {
 
                 if (!isPause) {
                     try {
-                        Thread.sleep(1500);
+                        Thread.sleep(10000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
